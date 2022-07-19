@@ -30,12 +30,13 @@ RESULT_DIR := $(BUILD_DIR)/result
 MLPERF_CONF := $(BUILD_DIR)/mlperf.conf
 FEATURE_CACHE := eval_features.pickle
 
-# Handle different nvidia-docker version
-ifneq ($(wildcard /usr/bin/nvidia-docker),)
-	DOCKER_RUN_CMD := nvidia-docker run
-else
-	DOCKER_RUN_CMD := docker run
-endif
+# # Handle different nvidia-docker version
+# ifneq ($(wildcard /usr/bin/nvidia-docker),)
+# 	DOCKER_RUN_CMD := nvidia-docker run
+# else
+# 	DOCKER_RUN_CMD := docker run
+# endif
+DOCKER_RUN_CMD := docker run
 
 .PHONY: setup
 setup:
@@ -43,7 +44,7 @@ setup:
 		mkdir $(BUILD_DIR); \
 	fi
 	@if [ ! -e $(MLPERF_CONF) ]; then \
-		cp ../../mlperf.conf $(MLPERF_CONF); \
+		cp mlperf.conf $(MLPERF_CONF); \
 	fi
 	@$(MAKE) -f $(MAKEFILE_NAME) init_submodule
 	@$(MAKE) -f $(MAKEFILE_NAME) download_data
