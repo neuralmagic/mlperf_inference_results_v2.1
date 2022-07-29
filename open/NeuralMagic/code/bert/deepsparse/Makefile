@@ -30,13 +30,12 @@ RESULT_DIR := $(BUILD_DIR)/result
 MLPERF_CONF := $(BUILD_DIR)/mlperf.conf
 FEATURE_CACHE := eval_features.pickle
 
-# # Handle different nvidia-docker version
-# ifneq ($(wildcard /usr/bin/nvidia-docker),)
-# 	DOCKER_RUN_CMD := nvidia-docker run
-# else
-# 	DOCKER_RUN_CMD := docker run
-# endif
-DOCKER_RUN_CMD := docker run
+# Handle different nvidia-docker version
+ifneq ($(wildcard /usr/bin/nvidia-docker),)
+	DOCKER_RUN_CMD := nvidia-docker run
+else
+	DOCKER_RUN_CMD := docker run
+endif
 
 .PHONY: setup
 setup:
