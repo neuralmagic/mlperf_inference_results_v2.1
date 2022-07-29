@@ -21,7 +21,7 @@ Please run the following commands:
 - `make setup`: initialize submodule, download datasets, and download models.
 - `make build_docker`: build docker image.
 - `make launch_docker`: launch docker container with an interaction session.
-- `python3 run.py --backend=deepsparse --model_path="zoo:nlp/question_answering/bert-large/pytorch/huggingface/squad/pruned80_quant-none-vnni" --scenario=[Offline|SingleStream|MultiStream|Server] [--accuracy]`: run the harness inside the docker container. Performance or Accuracy results will be printed in console.
+- `python3 run.py --backend=deepsparse --batch_size=1 --model_path="zoo:nlp/question_answering/bert-large/pytorch/huggingface/squad/pruned80_quant-none-vnni" --scenario=[Offline|SingleStream|MultiStream|Server] [--accuracy]`: run the harness inside the docker container. Performance or Accuracy results will be printed in console.
 
 ## Details
 
