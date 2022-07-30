@@ -31,5 +31,5 @@
     "framework": "DeepSparse",
     "operating_system": " Ubuntu 22.04 LTS",
     "other_software_stack": "5.15.0-33-generic",
-    "sw_notes": "Python 3.9.13, GCC 11.2.0"
+    "sw_notes": "DeepSparse 1.0.2, Python 3.9.13, GCC 11.2.0"
 }
