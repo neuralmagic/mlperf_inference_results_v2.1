@@ -47,8 +47,8 @@ setup:
 	fi
 	@$(MAKE) -f $(MAKEFILE_NAME) init_submodule
 	@$(MAKE) -f $(MAKEFILE_NAME) download_data
-	@$(MAKE) -f $(MAKEFILE_NAME) prepare_model
-#	@$(MAKE) -f $(MAKEFILE_NAME) download_model
+	@$(MAKE) -f $(MAKEFILE_NAME) prepare_sparse_models
+	@$(MAKE) -f $(MAKEFILE_NAME) download_model
 
 .PHONY: init_submodule
 init_submodule:
@@ -72,11 +72,9 @@ download_data:
 		mkdir $(RESULT_DIR); \
 	fi
 
-.PHONY: prepare_model
-prepare_model:
-	@if [ ! -e models/BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz ]; then \
-		cd models && tar xf BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz
-	fi
+.PHONY: prepare_sparse_models
+prepare_sparse_models:
+	cd models && tar xf BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz
 
 .PHONY: download_model
 download_model:

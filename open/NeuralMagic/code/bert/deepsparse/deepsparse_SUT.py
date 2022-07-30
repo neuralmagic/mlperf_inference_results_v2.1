@@ -23,6 +23,7 @@ sys.path.insert(0, os.getcwd())
 import mlperf_loadgen as lg
 import numpy as np
 from deepsparse import compile_model, Scheduler
+from deepsparse.utils import generate_random_inputs
 from squad_QSL import get_squad_QSL
 
 
@@ -60,8 +61,13 @@ class BERT_DeepSparse_SUT():
 
         self.qsl = get_squad_QSL(args.max_examples)
 
+        print("Warming up engine...")
+        warmup_inputs = generate_random_inputs(self.model_path, self.batch_size)
+        for i in range(10):
+            self.sess.run(warmup_inputs)
+
     def pad_to_batch(self, x):
-        x_pad = np.zeros((self.batch_size, x.shape[1]))
+        x_pad = np.zeros((self.batch_size, x.shape[1]), dtype=np.int64)
         x_pad[:x.shape[0], :x.shape[1]] = x
         return x_pad
 
