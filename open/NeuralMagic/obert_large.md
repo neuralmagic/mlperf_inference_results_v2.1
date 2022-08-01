@@ -105,7 +105,7 @@ distillation_modifiers:
 ```
 
 ## 2nd step: quantization-aware training
-Now that we have 95% semi-structured pruned BERT-Large model, we can apply INT8 quantization-aware training (QAT) on top of it to further improve the performance.
+Now that we have 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance.
 Assuming that the SparseML library is installed, the bash script to reproduce our quantization setup is as follows:
 
 ```shell
