@@ -4,12 +4,12 @@
 
 High-performance inference usually benefits more from (semi) structured sparsity patterns than from the unstructured ones. Hence, we employ the generalized oBERT formulation introduced in the paper and prune weights in the 4-block pattern, meaning that contiguous blocks of 4 weights are either set to zero or kept dense. Both pruning types, unstructured and 4-block, can be leveraged for computational speedups with the DeepSparse runtime, but 4-block pruning coupled with INT8 quantization can provide further performance gains. For quantization, we apply standard quantization-aware training QAT on top of the 4-block pruned models.
 
-To ease reproducibility, we conduct our experiments with popular open-source libraries: [Transformers](https://github.com/huggingface/transformers) and [SparseML](https://github.com/neuralmagic/sparseml). As previously noted, our compression setup consists of two steps, pruning and quantization, and now we present in detail each one of them with the corresponding configuration files (pruning *recipes*) and bash scripts to reproduce our results. For a fair comparison with other approaches we don't employ any form of structured compression and keep the original BERT-Large architecture intact. 
+To ease reproducibility, we conduct our experiments with popular open-source libraries: [Transformers](https://github.com/huggingface/transformers) and [SparseML](https://github.com/neuralmagic/sparseml). As previously noted, our compression setup consists of two steps, pruning and quantization, and now we present in detail each one of them with the corresponding configuration files (which we also call *compression recipes*) and bash scripts to reproduce our results. For a fair comparison with other approaches we don't employ any form of structured compression and keep the original BERT-Large architecture intact. 
 
-For experiments with the BERT-Large model we make use of one 48GB RTX A6000 GPU card. If this device is not available, our pruning setup supports `DistributedDataParallel` (DDP) mode in PyTorch which can be used to parallelize the process on a few smaller GPUs.
+For experiments with the BERT-Large model we make use of one 48GB RTX A6000 GPU card. If such a large-memory GPU device is not available, our pruning setup supports `DistributedDataParallel` (DDP) mode in PyTorch which can be used to parallelize the process on a few GPUs with less memory.
 
 ## 1st step: semi-structured gradual pruning
-Following the gradual pruning setup from the paper, we progressively prune the BERT-Large model over the span of 30-epochs. More specifically, we make use of the knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part of the model in the semi-structured 4-block pattern up to the 95% sparsity.
+Following the gradual pruning setup from the paper, we progressively prune the BERT-Large model over the span of 30 training epochs. More specifically, we make use of the knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part of the model in the semi-structured 4-block pattern up to 95% sparsity.
 
 Assuming that the SparseML library is installed, the bash script to reproduce our pruning setup is as follows:
 ```shell
@@ -107,7 +107,7 @@ distillation_modifiers:
 ```
 
 ## 2nd step: quantization-aware training
-Now that we have 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance, while keeping the pruning mask fixed.
+Now that we have a 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance, while keeping the pruning mask fixed.
 Assuming that the SparseML library is installed, the bash script to reproduce our quantization setup is as follows:
 
 ```shell
