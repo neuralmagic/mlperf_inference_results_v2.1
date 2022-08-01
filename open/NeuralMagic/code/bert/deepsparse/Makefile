@@ -30,13 +30,12 @@ RESULT_DIR := $(BUILD_DIR)/result
 MLPERF_CONF := $(BUILD_DIR)/mlperf.conf
 FEATURE_CACHE := eval_features.pickle
 
-# # Handle different nvidia-docker version
-# ifneq ($(wildcard /usr/bin/nvidia-docker),)
-# 	DOCKER_RUN_CMD := nvidia-docker run
-# else
-# 	DOCKER_RUN_CMD := docker run
-# endif
-DOCKER_RUN_CMD := docker run
+# Handle different nvidia-docker version
+ifneq ($(wildcard /usr/bin/nvidia-docker),)
+	DOCKER_RUN_CMD := nvidia-docker run
+else
+	DOCKER_RUN_CMD := docker run
+endif
 
 .PHONY: setup
 setup:
@@ -48,6 +47,7 @@ setup:
 	fi
 	@$(MAKE) -f $(MAKEFILE_NAME) init_submodule
 	@$(MAKE) -f $(MAKEFILE_NAME) download_data
+	@$(MAKE) -f $(MAKEFILE_NAME) prepare_sparse_models
 	@$(MAKE) -f $(MAKEFILE_NAME) download_model
 
 .PHONY: init_submodule
@@ -71,6 +71,12 @@ download_data:
 	@if [ ! -e $(RESULT_DIR) ]; then \
 		mkdir $(RESULT_DIR); \
 	fi
+
+.PHONY: prepare_sparse_models
+prepare_sparse_models:
+	cd models && tar xf BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz
+	cd models && tar xf oBERT-Large_95sparse_block4_qat.onnx.tar.xz
+	cd models && tar xf oBERT-MobileBERT_14layer_50sparse_block4_qat.onnx.tar.xz
 
 .PHONY: download_model
 download_model:

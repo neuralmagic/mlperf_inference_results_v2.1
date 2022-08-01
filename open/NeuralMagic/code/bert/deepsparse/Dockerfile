@@ -20,6 +20,7 @@ FROM ${BASE_IMAGE}
 RUN cd /tmp \
  && git clone https://github.com/mlperf/inference.git \
  && cd inference \
+ && git checkout r2.1 \
  && git submodule update --init third_party/pybind \
  && cd loadgen \
  && python3 setup.py install \
@@ -27,7 +28,7 @@ RUN cd /tmp \
  && rm -rf inference
 
 # Install dependencies
-RUN python3 -m pip install torch==1.4.0 onnx==1.6.0 transformers==2.4.0 onnxruntime==1.2.0 numpy==1.18.0 deepsparse==0.11
+RUN python3 -m pip install torch==1.4.0 onnx==1.6.0 transformers==2.4.0 onnxruntime==1.2.0 numpy==1.18.0 deepsparse==1.0.2
 
 # Add user
 ARG GID

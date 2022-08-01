@@ -1,0 +1,3 @@
+[submodule "open/NeuralMagic/code/bert/deepsparse/DeepLearningExamples"]
+	path = open/NeuralMagic/code/bert/deepsparse/DeepLearningExamples
+	url = https://github.com/NVIDIA/DeepLearningExamples.git
