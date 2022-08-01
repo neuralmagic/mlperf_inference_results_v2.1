@@ -6,7 +6,7 @@ High-performance inference usually benefits more from (semi) structured sparsity
 
 To ease reproducibility, we conduct our experiments with popular open-source libraries: [Transformers](https://github.com/huggingface/transformers) and [SparseML](https://github.com/neuralmagic/sparseml). As previously noted, our compression setup consists of two steps, pruning and quantization, and now we present in detail each one of them with the corresponding configuration files (pruning *recipes*) and bash scripts to reproduce our results. For a fair comparison with other approaches we don't employ any form of structured compression and keep the original BERT-Large architecture intact. 
 
-For experiments with the BERT-Large model we make use of one 48GB RTX A6000 GPU card. In case that this device is not available, our pruning setup supports `DistributedDataParallel` (DDP) mode in PyTorch which can be used to parallelize the process on a few smaller GPUs.
+For experiments with the BERT-Large model we make use of one 48GB RTX A6000 GPU card. If this device is not available, our pruning setup supports `DistributedDataParallel` (DDP) mode in PyTorch which can be used to parallelize the process on a few smaller GPUs.
 
 ## 1st step: semi-structured gradual pruning
 Following the gradual pruning setup from the paper, we progressively prune the BERT-Large model over the span of 30-epochs. More specifically, we make use of the knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part of the model in the semi-structured 4-block pattern up to the 95% sparsity.
