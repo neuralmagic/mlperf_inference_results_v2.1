@@ -1,4 +1,4 @@
-# obert-large: The Optimal BERT Surgeon applied to the BERT-Large model
+# oBERT-Large: The Optimal BERT Surgeon applied to the BERT-Large model
 
 [The Optimal BERT Surgeon: Scalable and Accurate Second-Order Pruning for Large Language Models](https://arxiv.org/abs/2203.07259) (oBERT) stands for an efficient and accurate weight pruning method based on approximate second-order information, which we showed to yield state-of-the-art results in both stages of language tasks: pre-training and fine-tuning. For the MLPerf inference submission, we apply it in the fine-tuning stage on the SQuADv1.1 task. More specifically we adopt the gradual downstream pruning setup presented in the paper and progressively prune and fine-tune the popular [bert-large-uncased](https://huggingface.co/bert-large-uncased) model.
 
