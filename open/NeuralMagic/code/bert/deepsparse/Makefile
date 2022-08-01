@@ -75,6 +75,8 @@ download_data:
 .PHONY: prepare_sparse_models
 prepare_sparse_models:
 	cd models && tar xf BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz
+	cd models && tar xf oBERT-Large_95sparse_block4_qat.onnx.tar.xz
+	cd models && tar xf oBERT-MobileBERT_14layer_50sparse_block4_qat.onnx.tar.xz
 
 .PHONY: download_model
 download_model:
