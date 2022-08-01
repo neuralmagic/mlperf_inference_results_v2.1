@@ -105,7 +105,7 @@ distillation_modifiers:
 ```
 
 ## 2nd step: quantization-aware training
-Now that we have 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance.
+Now that we have 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance, while keeping the pruning mask fixed.
 Assuming that the SparseML library is installed, the bash script to reproduce our quantization setup is as follows:
 
 ```shell
@@ -184,7 +184,7 @@ quantization_modifiers:
 ```
 
 ## Final step: export to ONNX and run with DeepSparse
-To run the pruned and quantized `obert-large` model in the DeepSparse engine, we need to export it to ONNX first:
+To run the pruned and quantized `obert-large` model in the DeepSparse engine, we need to export it to ONNX with:
 ```shell
 sparseml.transformers.export_onnx \
     --model_path /path/to/my/pruned/and/quantized/model \
@@ -197,10 +197,10 @@ TODO: Michael please add the command to run this model with DeepSparse
 
 For more details about our compression approach, please check the Optimal BERT Surgeon (oBERT) paper: [https://arxiv.org/abs/2203.07259](https://arxiv.org/abs/2203.07259).
 
-The Optimal BERT Surgeon code with more recipes, examples and tutorials: [https://github.com/neuralmagic/sparseml/tree/main/research/optimal_BERT_surgeon_oBERT](https://github.com/neuralmagic/sparseml/tree/main/research/optimal_BERT_surgeon_oBERT).
+For the full algorithm implementation, more recipes, examples and tutorials: [https://github.com/neuralmagic/sparseml/tree/main/research/optimal_BERT_surgeon_oBERT](https://github.com/neuralmagic/sparseml/tree/main/research/optimal_BERT_surgeon_oBERT).
 
 ## Citation info
-If you find the model useful, please consider citing our work:
+If you find our models useful, please consider citing our work:
 ```bibtex
 @article{kurtic2022optimal,
   title={The Optimal BERT Surgeon: Scalable and Accurate Second-Order Pruning for Large Language Models},
