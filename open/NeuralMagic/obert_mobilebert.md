@@ -159,8 +159,6 @@ CUDA_VISIBLE_DEVICES=0 src/sparseml/transformers/question_answering.py
     --num_train_epochs 2 \
     --recipe obert_mobilebert_quantization_recipe.yaml \
     --output_dir my_quantization_output_dir
-
- --recipe integrations/huggingface-transformers/recipes/daslab/mobilebert_QAT/2ep_rewindno_LR3e5.yaml
 ```
 
 And the *obert_mobilebert_quantization_recipe.yaml* is as follows:
