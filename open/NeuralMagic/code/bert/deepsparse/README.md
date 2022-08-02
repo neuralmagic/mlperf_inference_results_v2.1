@@ -31,30 +31,36 @@ Please run the following commands:
 
 #### SingleStream
 Performance: `python3 run.py --backend=deepsparse --model_path=models/BERT-Large_pruneofa_80sparse_qat.onnx --batch_size=1 --scenario=SingleStream`
+
 Accuracy: `python3 run.py --backend=deepsparse --model_path=models/BERT-Large_pruneofa_80sparse_qat.onnx --batch_size=1 --scenario=SingleStream --accuracy`
 
 #### Offline
 Performance: `python3 run.py --backend=deepsparse --model_path=models/BERT-Large_pruneofa_80sparse_qat.onnx --batch_size=128 --scenario=Offline`
+
 Accuracy: `python3 run.py --backend=deepsparse --model_path=models/BERT-Large_pruneofa_80sparse_qat.onnx --batch_size=128 --scenario=Offline --accuracy`
 
 ### oBERT-Large (bert-99_obert-large)
 
 #### SingleStream
 Performance: `python3 run.py --backend=deepsparse --model_path=models/oBERT-Large_95sparse_qat.onnx --batch_size=1 --scenario=SingleStream`
+
 Accuracy: `python3 run.py --backend=deepsparse --model_path=models/oBERT-Large_95sparse_qat.onnx --batch_size=1 --scenario=SingleStream --accuracy`
 
 #### Offline
 Performance: `python3 run.py --backend=deepsparse --model_path=models/oBERT-Large_95sparse_qat.onnx --batch_size=128 --scenario=Offline`
+
 Accuracy: `python3 run.py --backend=deepsparse --model_path=models/oBERT-Large_95sparse_qat.onnx --batch_size=128 --scenario=Offline --accuracy`
 
 ### oBERT-MobileBERT (bert-99_obert-mobilebert)
 
 #### SingleStream
 Performance: `python3 run.py --backend=deepsparse --model_path=models/oBERT-MobileBERT_14layer_50sparse_qat.onnx --batch_size=1 --scenario=SingleStream`
+
 Accuracy: `python3 run.py --backend=deepsparse --model_path=models/oBERT-MobileBERT_14layer_50sparse_qat.onnx --batch_size=1 --scenario=SingleStream --accuracy`
 
 #### Offline
 Performance: `python3 run.py --backend=deepsparse --model_path=models/oBERT-MobileBERT_14layer_50sparse_qat.onnx --batch_size=128 --scenario=Offline`
+
 Accuracy: `python3 run.py --backend=deepsparse --model_path=models/oBERT-MobileBERT_14layer_50sparse_qat.onnx --batch_size=128 --scenario=Offline --accuracy`
 
 ## Details
