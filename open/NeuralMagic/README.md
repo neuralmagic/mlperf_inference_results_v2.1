@@ -9,7 +9,7 @@ Our MLPerf Inference v2.1 submission contains the following results for the BERT
 | Benchmark            | % of BERT-Large FP32 Accuracy (F1=90.874) | Scenarios             |
 |:--------------------:|:-----------------------------------------:|:---------------------:|
 | BERT-Large Prune OFA | 99.48% (F1=90.41)                         | SingleStream, Offline |
-| [oBERT-Large](obert-large.md)          | 99.27% (F1=90.21)                         | SingleStream, Offline |
+| [oBERT-Large](obert_large.md)          | 99.27% (F1=90.21)                         | SingleStream, Offline |
 | oBERT-MobileBERT     | 99.39% (F1=90.32)                         | SingleStream, Offline |
 
 The benchmark is stored in the [code/bert/deepsparse](code/bert/deepsparse) directory which contains a `README.md` detailing instructions on how to set up the benchmark.
