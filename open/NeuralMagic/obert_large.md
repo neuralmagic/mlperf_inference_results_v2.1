@@ -14,7 +14,7 @@ Following the gradual pruning setup from the paper, we progressively prune the B
 
 Assuming that the SparseML library is installed, the bash script to reproduce our pruning setup is as follows:
 ```shell
-CUDA_VISIBLE_DEVICES=0 src/sparseml/transformers/question_answering.py
+CUDA_VISIBLE_DEVICES=0 python src/sparseml/transformers/question_answering.py \
     --distill_teacher neuralmagic/bert-large-uncased-finetuned-squadv1 \
     --model_name_or_path neuralmagic/bert-large-uncased-finetuned-squadv1 \
     --dataset_name squad \
@@ -113,7 +113,7 @@ Now that we have a 95% semi-structured pruned BERT-Large model, we apply INT8 qu
 
 Assuming that the SparseML library is installed, the bash script to reproduce our quantization setup is as follows:
 ```shell
-CUDA_VISIBLE_DEVICES=0 src/sparseml/transformers/question_answering.py
+CUDA_VISIBLE_DEVICES=0 python src/sparseml/transformers/question_answering.py \
     --distill_teacher neuralmagic/bert-large-uncased-finetuned-squadv1 \
     --model_name_or_path /path/to/the/pruned/checkpoint/from/the/previous/step \
     --dataset_name squad \
