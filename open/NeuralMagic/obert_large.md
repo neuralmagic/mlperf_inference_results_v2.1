@@ -39,12 +39,11 @@ CUDA_VISIBLE_DEVICES=0 src/sparseml/transformers/question_answering.py
 
 And the *obert_large_compression_recipe.yaml* is as follows:
 ```yaml
-modifiers:
+training_modifiers:
   - !EpochRangeModifier
     start_epoch: 0.0
     end_epoch: 30.0
 
-training_modifiers:
   - !TrainableParamsModifier
     params:
     - bert.embeddings.word_embeddings.weight
@@ -77,6 +76,7 @@ training_modifiers:
     init_lr: 1e-4
     final_lr: 1e-6
 
+pruning_modifiers:
   - !OBSPruningModifier
     params: [
       "re:bert.encoder.layer.*.attention.self.query.weight",
@@ -137,7 +137,7 @@ CUDA_VISIBLE_DEVICES=0 src/sparseml/transformers/question_answering.py
 
 And the *obert_large_quantization_recipe.yaml* is as follows:
 ```yaml
-modifiers:
+training_modifiers:
   - !EpochRangeModifier
     start_epoch: 0.0
     end_epoch: 2.0
