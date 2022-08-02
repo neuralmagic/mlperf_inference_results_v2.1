@@ -2,7 +2,7 @@
     "division": "open",
     "submitter": "NeuralMagic",
     "status": "available",
-    "system_type": "edge",
+    "system_type": "edge,datacenter",
     "system_name": "NM80ci_ICX (2x Intel Xeon 8380, DeepSparse)",
     "number_of_nodes": "1",
     "host_processor_model_name": "Intel(R) Xeon(R) Platinum 8380 CPU @ 2.30GHz",
