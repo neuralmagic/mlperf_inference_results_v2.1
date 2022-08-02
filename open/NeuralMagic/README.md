@@ -12,5 +12,5 @@ Our MLPerf Inference v2.1 submission contains the following results for the BERT
 | oBERT-Large          | 99.28%                        | SingleStream, Offline |
 | oBERT-MobileBERT     | 99.28%                        | SingleStream, Offline |
 
-The benchmark is stored in the [code/bert/](code/bert) directory which contains a `README.md` detailing instructions on how to set up the benchmark. 
+The benchmark is stored in the [code/bert/deepsparse](code/bert/deepsparse) directory which contains a `README.md` detailing instructions on how to set up the benchmark.
 The benchmark was evaluated using a server with two Intel(R) Xeon(R) Platinum 8380 (IceLake) CPUs with 40 cores.
