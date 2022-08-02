@@ -4,11 +4,12 @@
 
 High-performance inference usually benefits more from (semi) structured sparsity patterns than from the unstructured ones. Hence, we employ the generalized oBERT formulation introduced in the paper and prune weights in the 4-block pattern, meaning that contiguous blocks of 4 weights are either set to zero or kept dense. Both pruning types, unstructured and 4-block, can be leveraged for computational speedups with the DeepSparse runtime, but 4-block pruning coupled with INT8 quantization can provide further performance gains. For quantization, we apply standard quantization-aware training QAT on top of the 4-block pruned models.
 
-To ease reproducibility, we conduct our experiments with popular open-source libraries: [Transformers](https://github.com/huggingface/transformers) and [SparseML](https://github.com/neuralmagic/sparseml). As previously noted, our compression setup consists of two steps, pruning and quantization, and now we present in detail each one of them with the corresponding configuration files (which we also call *compression recipes*) and bash scripts to reproduce our results. For a fair comparison with other approaches we don't employ any form of structured compression and keep the original BERT-Large architecture intact. 
+To ease reproducibility, we conduct our experiments with popular open-source libraries: [Transformers](https://github.com/huggingface/transformers) and [SparseML](https://github.com/neuralmagic/sparseml). As previously noted, our compression setup consists of two steps, pruning and quantization, and now we present in detail each one of them with the corresponding configuration files (which we also call *compression recipes*) and bash scripts to reproduce our results. For a fair comparison with other approaches we don't employ any form of structured compression and keep the original BERT-Large architecture intact.
 
 For experiments with the BERT-Large model we make use of one 48GB RTX A6000 GPU card. If such a large-memory GPU device is not available, our pruning setup supports `DistributedDataParallel` (DDP) mode in PyTorch which can be used to parallelize the process on a few GPUs with less memory.
 
 ## 1st step: semi-structured gradual pruning
+
 Following the gradual pruning setup from the paper, we progressively prune the BERT-Large model over the span of 30 training epochs. More specifically, we make use of the knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part of the model in the semi-structured 4-block pattern up to 95% sparsity.
 
 Assuming that the SparseML library is installed, the bash script to reproduce our pruning setup is as follows:
@@ -32,11 +33,11 @@ CUDA_VISIBLE_DEVICES=0 src/sparseml/transformers/question_answering.py
     --preprocessing_num_workers 8 \
     --seed 42 \
     --num_train_epochs 30 \
-    --recipe obert_large_pruning_recipe.yaml \
+    --recipe obert_large_compression_recipe.yaml \
     --output_dir my_pruning_output_dir
 ```
 
-And the *obert_large_pruning_recipe.yaml* is as follows:
+And the *obert_large_compression_recipe.yaml* is as follows:
 ```yaml
 modifiers:
   - !EpochRangeModifier
@@ -101,15 +102,16 @@ training_modifiers:
 
 distillation_modifiers:
   - !DistillationModifier
-     hardness: 1.0
-     temperature: 5.0
-     distill_output_keys: [start_logits, end_logits]
+    hardness: 1.0
+    temperature: 5.0
+    distill_output_keys: [start_logits, end_logits]
 ```
 
 ## 2nd step: quantization-aware training
-Now that we have a 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance, while keeping the pruning mask fixed.
-Assuming that the SparseML library is installed, the bash script to reproduce our quantization setup is as follows:
 
+Now that we have a 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance, while keeping the pruning mask fixed.
+
+Assuming that the SparseML library is installed, the bash script to reproduce our quantization setup is as follows:
 ```shell
 CUDA_VISIBLE_DEVICES=0 src/sparseml/transformers/question_answering.py
     --distill_teacher neuralmagic/bert-large-uncased-finetuned-squadv1 \
@@ -162,9 +164,9 @@ pruning_modifiers:
 
 distillation_modifiers:
   - !DistillationModifier
-     hardness: 1.0
-     temperature: 5.0
-     distill_output_keys: [start_logits, end_logits]
+    hardness: 1.0
+    temperature: 5.0
+    distill_output_keys: [start_logits, end_logits]
 
 quantization_modifiers:
   - !QuantizationModifier
@@ -176,7 +178,7 @@ quantization_modifiers:
     model_fuse_fn_name: conv_bn_relus
     quantize_conv_activations: True
     quantize_embeddings: True
-    quantize_embedding_activations: True
+    quantize_embedding_activations: False
     quantize_linear_activations: False
     reduce_range: False
     start_epoch: 0.0
