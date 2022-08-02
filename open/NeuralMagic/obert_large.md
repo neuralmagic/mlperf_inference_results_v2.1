@@ -170,28 +170,20 @@ distillation_modifiers:
 
 quantization_modifiers:
   - !QuantizationModifier
-    activation_bits: 8
-    disable_quantization_observer_epoch: 1.0
-    exclude_batchnorm: True
-    exclude_module_types: ['LayerNorm', 'BatchNorm1d', 'BatchNorm2d', 'BatchNorm3d']
-    freeze_bn_stats_epoch: 1.0
-    model_fuse_fn_name: conv_bn_relus
-    quantize_conv_activations: True
-    quantize_embeddings: True
-    quantize_embedding_activations: False
-    quantize_linear_activations: False
-    reduce_range: False
     start_epoch: 0.0
-    submodules: ['bert.encoder', 'qa_outputs', 'bert.embeddings']
-    tensorrt: False
-    weight_bits: 8
+    disable_quantization_observer_epoch: 1.0
+    exclude_module_types: ['LayerNorm']
+    quantize_embedding_activations: False
+    quantize_embeddings: True
+    quantize_linear_activations: False
+    submodules: ['bert.embeddings', 'bert.encoder', 'qa_outputs']
 ```
 
 ## Final step: export to ONNX and run with DeepSparse
-To run the pruned and quantized `obert-large` model in the DeepSparse engine, we need to export it to ONNX with:
+To run the compressed and quantized `obert-large` model in the DeepSparse engine, we need to export it to ONNX with:
 ```shell
 sparseml.transformers.export_onnx \
-    --model_path /path/to/my/pruned/and/quantized/model \
+    --model_path /path/to/my/compressed/and/quantized/model \
     --task 'question-answering' --sequence_length 384
 ```
 
