@@ -8,7 +8,7 @@ To ease reproducibility, we conduct our experiments with popular open-source lib
 
 Our compression setup with the MobileBERT model takes up to 6GB of GPU memory in total, which makes it easily reproducible on all modern GPUs.
 
-## 1st step: layer-dropping and semi-structured gradual pruning
+## Step 1: Layer-Dropping and Semi-Structured Gradual Pruning
 
 The encoder part of the MobileBERT architecture has 24 identical layers, each composed of several attention, bottleneck and fully-connected modules. Following insights about layer-dropping from the paper, we have identified that not all 24 layers are needed to successfully recover dense model's accuracy on the SQuADv1 task which is why we apply direct layer-dropping by keeping the first 14 layers and dropping the rest.
 Then, we follow our gradual pruning setup to progressively prune the remaining 14 layers of MobileBERT model over the span of 30 training epochs. More specifically, we make use of knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part in the semi-structured 4-block pattern up to 50% sparsity.
@@ -133,7 +133,7 @@ distillation_modifiers:
     distill_output_keys: [start_logits, end_logits]
 ```
 
-## 2nd step: quantization-aware training
+## Step 2: Quantization-Aware Training
 
 Now that we have a 50% semi-structured pruned 14 layers of the MobileBERT model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance, while keeping the pruning mask fixed.
 
@@ -229,7 +229,7 @@ quantization_modifiers:
     submodules: ['mobilebert.embeddings', 'mobilebert.encoder', 'qa_outputs']
 ```
 
-## Final step: export to ONNX and run with DeepSparse
+## Final Step: Export to ONNX and Benchmark with DeepSparse
 To run the compressed and quantized `obert-mobilebert` model in the DeepSparse engine, we need to export it to ONNX with:
 ```shell
 sparseml.transformers.export_onnx \
@@ -239,7 +239,7 @@ sparseml.transformers.export_onnx \
 
 TODO: Michael please add the command to run this model with DeepSparse
 
-## Additional info
+## Additional Info
 
 For more details about our compression approach, please check the Optimal BERT Surgeon (oBERT) paper: [https://arxiv.org/abs/2203.07259](https://arxiv.org/abs/2203.07259).
 
