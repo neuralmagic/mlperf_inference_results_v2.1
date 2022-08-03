@@ -8,7 +8,7 @@ To ease reproducibility, we conduct our experiments with popular open-source lib
 
 For experiments with the BERT-Large model we make use of one 48GB RTX A6000 GPU card. If such a large-memory GPU device is not available, our pruning setup supports `DistributedDataParallel` (DDP) mode in PyTorch which can be used to parallelize the process on a few GPUs with less memory.
 
-## 1st step: semi-structured gradual pruning
+## Step 1: Semi-Structured Gradual Pruning
 
 Following the gradual pruning setup from the paper, we progressively prune the BERT-Large model over the span of 30 training epochs. More specifically, we make use of the knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part of the model in the semi-structured 4-block pattern up to 95% sparsity.
 
@@ -107,7 +107,7 @@ distillation_modifiers:
     distill_output_keys: [start_logits, end_logits]
 ```
 
-## 2nd step: quantization-aware training
+## Step 2: Quantization-Aware Training
 
 Now that we have a 95% semi-structured pruned BERT-Large model, we apply INT8 quantization-aware training (QAT) on top of it to further improve the performance, while keeping the pruning mask fixed.
 
@@ -179,7 +179,8 @@ quantization_modifiers:
     submodules: ['bert.embeddings', 'bert.encoder', 'qa_outputs']
 ```
 
-## Final step: export to ONNX and run with DeepSparse
+## Final Step: Export to ONNX and Benchmark with DeepSparse
+
 To run the compressed and quantized `obert-large` model in the DeepSparse engine, we need to export it to ONNX with:
 ```shell
 sparseml.transformers.export_onnx \
@@ -191,8 +192,6 @@ Then benchmark the model in the engine:
 ```
 deepsparse.benchmark /path/to/my/compressed/and/quantized/model.onnx
 ```
-
-TODO: Michael please add the command to run this model with DeepSparse
 
 ## Additional info
 
