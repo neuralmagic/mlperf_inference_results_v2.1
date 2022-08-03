@@ -187,6 +187,11 @@ sparseml.transformers.export_onnx \
     --task 'question-answering' --sequence_length 384
 ```
 
+Then benchmark the model in the engine:
+```
+deepsparse.benchmark /path/to/my/compressed/and/quantized/model.onnx
+```
+
 TODO: Michael please add the command to run this model with DeepSparse
 
 ## Additional info
