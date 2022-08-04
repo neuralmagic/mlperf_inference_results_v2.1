@@ -1,8 +1,8 @@
-# Neural Magic MLPerf Inference Benchmarks for Natural Language Processing
+# Neural Magic DeepSparse MLPerf Inference Benchmarks for Natural Language Processing
 
 This is the reference implementation for MLPerf Inference benchmarks for Natural Language Processing.
 
-The chosen model is BERT-Large performing SQuAD v1.1 question answering task, with the target being to maintain >= 99% of the original model's f1_score=90.874%.
+The chosen models are variants of BERT-Large performing the SQuAD v1.1 question answering task, with the target being to maintain >= 99% of the original model's f1_score=90.874%.
 
 ## Supported Models
 
