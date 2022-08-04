@@ -22,6 +22,12 @@ The benchmark was evaluated using a server with two Intel(R) Xeon(R) Platinum 83
 
 [BERT-Large Prune OFA - Prune Once for All: Sparse Pre-Trained Language Models](prune-ofa_large.md)
 
+[oBERT-Large: The Optimal BERT Surgeon applied to the BERT-Large model](obert_large.md)
+
+[oBERT-MobileBERT: The Optimal BERT Surgeon applied to the MobileBERT model](obert_mobilebert.md)
+
+## Citation info
+If you find our models useful, please consider citing our work:
 ```bibtex
 @article{zafrir2021prune,
   title={Prune Once for All: Sparse Pre-Trained Language Models},
@@ -30,10 +36,6 @@ The benchmark was evaluated using a server with two Intel(R) Xeon(R) Platinum 83
   year={2021}
 }
 ```
-
-[oBERT-Large: The Optimal BERT Surgeon applied to the BERT-Large model](obert_large.md)
-
-[oBERT-MobileBERT: The Optimal BERT Surgeon applied to the MobileBERT model](obert_mobilebert.md)
 
 ```bibtex
 @article{kurtic2022optimal,
