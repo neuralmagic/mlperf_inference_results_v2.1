@@ -1,6 +1,6 @@
 # oBERT-Large: The Optimal BERT Surgeon applied to the BERT-Large model
 
-[The Optimal BERT Surgeon: Scalable and Accurate Second-Order Pruning for Large Language Models](https://arxiv.org/abs/2203.07259) (oBERT) stands for an efficient and accurate weight pruning method based on approximate second-order information, which we showed to yield state-of-the-art results in both stages of language tasks: pre-training and fine-tuning. For the MLPerf inference submission, we apply it in the fine-tuning stage on the SQuADv1.1 task. More specifically we adopt the gradual downstream pruning setup presented in the paper and progressively prune and fine-tune the popular [bert-large-uncased](https://huggingface.co/bert-large-uncased) model.
+[The Optimal BERT Surgeon: Scalable and Accurate Second-Order Pruning for Large Language Models](https://arxiv.org/abs/2203.07259) (oBERT) is an efficient and accurate weight pruning method based on approximate second-order information, which we showed to yield state-of-the-art results in both stages of language tasks: pre-training and fine-tuning. For the MLPerf inference submission, we apply it in the fine-tuning stage on the SQuADv1.1 task. More specifically we adopt the gradual downstream pruning setup presented in the paper and progressively prune and fine-tune the popular [bert-large-uncased](https://huggingface.co/bert-large-uncased) model.
 
 High-performance inference usually benefits more from (semi) structured sparsity patterns than from the unstructured ones. Hence, we employ the generalized oBERT formulation introduced in the paper and prune weights in the 4-block pattern, meaning that contiguous blocks of 4 weights are either set to zero or kept dense. Both pruning types, unstructured and 4-block, can be leveraged for computational speedups with the DeepSparse runtime, but 4-block pruning coupled with INT8 quantization can provide further performance gains. For quantization, we apply standard quantization-aware training QAT on top of the 4-block pruned models.
 
@@ -10,7 +10,7 @@ For experiments with the BERT-Large model we make use of one 48GB RTX A6000 GPU 
 
 ## Step 1: Semi-Structured Gradual Pruning
 
-Following the gradual pruning setup from the paper, we progressively prune the BERT-Large model over the span of 30 training epochs. More specifically, we make use of the knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part of the model in the semi-structured 4-block pattern up to 95% sparsity.
+Following the gradual pruning setup from the paper, we progressively prune the BERT-Large model over the span of 30 training epochs. More specifically, we make use of knowledge-distillation from the dense teacher, learning rate scheduler with rewinds and cubic sparsity scheduler with high initial pruning step. We prune the encoder part of the model in the semi-structured 4-block pattern up to 95% sparsity.
 
 Assuming that the SparseML library is installed, the bash script to reproduce our pruning setup is as follows:
 ```shell
