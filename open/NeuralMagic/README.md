@@ -8,11 +8,12 @@ In this submission, we show three different methods of optimizing BERT-Large by 
 
 Our MLPerf Inference v2.1 submission contains the following results for the BERT-Large SQuAD v1.1 question answering task:
 
-| Benchmark            | % of BERT-Large FP32 Accuracy (F1=90.874) | Scenarios             |
-|:--------------------:|:-----------------------------------------:|:---------------------:|
-| [BERT-Large Prune OFA](prune-ofa_large.md) | 99.48% (F1=90.41)                         | SingleStream, Offline |
-| [oBERT-Large](obert_large.md)          | 99.27% (F1=90.21)                         | SingleStream, Offline |
-| [oBERT-MobileBERT](obert_mobilebert.md)     | 99.39% (F1=90.32)                         | SingleStream, Offline |
+| Benchmark      | SQuAD v1.1 F1 Score (R=X% of Base Accuracy) | SingleStream Latency [ms]  |  Offline Throughput [samples/sec]  |
+|:----------------:|:------:|:-------:|:--------:|
+| BERT-Large FP32 ONNXRuntime | 90.874 (R=100.00%)	| 60.49	| 16.53  |
+| [BERT-Large Prune OFA](prune-ofa_large.md) DeepSparse  | 90.41 (R=99.48%)	| 21.98 | 160.23 |
+| [oBERT-Large](obert_large.md) DeepSparse  | 90.21 (R=99.27%)	| 16.89 | 230.74  |
+| [oBERT-MobileBERT](obert_mobilebert.md) DeepSparse  | 90.32 (R=99.39%)	| 5.44 | 928.58  |
 
 The benchmark implementation and models are stored in the [code/bert/deepsparse](code/bert/deepsparse) directory which contains a `README.md` detailing instructions on how to set up the benchmark. An example of the commands used to generate this submission is stored in [submission.sh](submission.sh).
 
