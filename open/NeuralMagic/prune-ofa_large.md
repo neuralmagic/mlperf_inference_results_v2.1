@@ -8,7 +8,7 @@ This method was presented in an ENLSP@NeurIPS2021 [paper](https://arxiv.org/abs/
 
 
 <figure>
-<img src="pruneofa_figure.png">
+<img src="https://gist.githubusercontent.com/ofirzaf/1d1fe59974ae3265a2637cf84b502ddd/raw/fab777bd0a1b00672149562a058afcf776b43286/pruneofa_figure.png">
 <figcaption> Figure 1: Prune OFA method visualization </figcaption>
 </figure>
 
@@ -41,7 +41,7 @@ To create BERT-Large-PruneOFA we took used [BERT-Large-uncased](https://huggingf
 Then we performed the same process described in the original paper using the same hyper-parameters.
 The model was trained to 80% block structured sparsity to maximize the performance of the model on the target hardware.
 
-The model was trained using the implementation available in [IntelLabs/Model-Compression-Research-Package](https://github.com/IntelLabs/Model-Compression-Research-Package).
+The model was trained using the implementation available in [IntelLabs/Model-Compression-Research-Package](https://github.com/IntelLabs/Model-Compression-Research-Package) on 8xNVIDIA Tesla-A100 + 2xIntel(R) Xeon(R) Platinum 8280 system.
 
 ## Fine-Tuning BERT-Large-PruneOFA to SQuADv1.1
 
@@ -82,4 +82,15 @@ pip install deepsparse[server]
 
 # Deploy model with Deepsparse server
 deepsparse.server --task question_answering --batch_size 1 --model_path bert_large_uncased-squad
+```
+
+## Citation info
+If you find our models useful, please consider citing our work:
+```bibtex
+@article{zafrir2021prune,
+  title={Prune Once for All: Sparse Pre-Trained Language Models},
+  author={Zafrir, Ofir and Larey, Ariel and Boudoukh, Guy and Shen, Haihao and Wasserblat, Moshe},
+  journal={arXiv preprint arXiv:2111.05754},
+  year={2021}
+}
 ```
