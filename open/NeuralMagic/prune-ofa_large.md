@@ -8,7 +8,7 @@ This method was presented in an ENLSP@NeurIPS2021 [paper](https://arxiv.org/abs/
 
 
 <figure>
-<img src="https://gist.githubusercontent.com/ofirzaf/1d1fe59974ae3265a2637cf84b502ddd/raw/fab777bd0a1b00672149562a058afcf776b43286/pruneofa_figure.png">
+<img src="pruneofa_figure.png">
 <figcaption> Figure 1: Prune OFA method visualization </figcaption>
 </figure>
 
