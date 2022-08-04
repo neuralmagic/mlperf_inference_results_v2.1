@@ -10,7 +10,7 @@ Our MLPerf Inference v2.1 submission contains the following results for the BERT
 
 | Benchmark      | Engine  | Precision | SQuAD v1.1 F1 Score (R=X% of Base Accuracy) | SingleStream Latency [ms]  |  Offline Throughput [samples/sec]  |
 |:----------------:|:-----------:|:-----------:|:------:|:-------:|:--------:|
-| Baseline [BERT-Large](https://zenodo.org/record/3733910) | ONNXRuntime | FP32 | 90.874 (R=100.00%)	| 188.57	| 5.30  |
+| [BERT-Large](https://zenodo.org/record/3733910) Baseline | ONNXRuntime | FP32 | 90.874 (R=100.00%)	| 188.57	| 5.30  |
 | [BERT-Large Prune OFA](prune-ofa_large.md) | DeepSparse | INT8  | 90.41 (R=99.48%)	| 21.98 | 160.23 |
 | [oBERT-Large](obert_large.md) | DeepSparse | INT8  | 90.21 (R=99.27%)	| 16.89 | 230.74  |
 | [oBERT-MobileBERT](obert_mobilebert.md) | DeepSparse | INT8  | 90.32 (R=99.39%)	| 5.44 | 928.58  |
