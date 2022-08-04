@@ -6,7 +6,7 @@ This is the repository of Neural Magic's BERT-Large DeepSparse submission for [M
 
 In this submission, we show three different methods of optimizing BERT-Large by combining various methods of compression covering: unstructured gradual pruning, quantization-aware training, and structural distillation. 
 
-Maintaining >= 99% of the original BERT-Large's F1 score, we show it is possible to:
+Maintaining >= 99% of the original BERT-Large F1 score and using the [DeepSparse Engine](https://github.com/neuralmagic/deepsparse), we show it is possible to:
 - Compress the FP32 dense weights by orders of magnitude from 1.3 GB to 90-10 MB.
 - Improve throughput performance from ~10 samples/sec to 100-1000 samples/sec
 
