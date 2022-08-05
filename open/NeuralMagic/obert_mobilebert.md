@@ -178,7 +178,7 @@ training_modifiers:
 pruning_modifiers:
   - !LayerPruningModifier
     start_epoch: 0.0
-    end_epoch: 30.0
+    end_epoch: 2.0
     layers: [
         'mobilebert.encoder.layer.14',
         'mobilebert.encoder.layer.15',
