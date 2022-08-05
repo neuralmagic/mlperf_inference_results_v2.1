@@ -14,7 +14,7 @@ This method was presented in an ENLSP@NeurIPS2021 [paper](https://arxiv.org/abs/
 
 ### Pre-Training a Sparse Language Model
 
-The method takes as an input a pre-trained language model, a large text corpora as a pre-training dataset, and outputs a sparse language model of the same architecture. 
+The method takes as an input a pre-trained language model, a large text corpus as a pre-training dataset, and outputs a sparse language model of the same architecture. 
 The method consists of two steps, teacher preparation and student pruning. 
 
 #### Teacher preparation
@@ -32,7 +32,7 @@ The output model of this process is a sparse pretrained language model.
 ### Fine-Tuning
 
 Fine-tuning of a sparse pre-trained language model is the same as fine-tuning a dense pre-trained model with one difference.
-A sparsity mask is initilized for the model in order to keep the model's sparsity pattern in-place while optimizing the non-zero model's weights.
+A sparsity mask is initialized for the model in order to keep the model's sparsity pattern in-place while optimizing the non-zero model's weights.
 Knowledge distillation from a task specific teacher can enhance the results further.
 
 ## Creating BERT-Large-PruneOFA
@@ -45,7 +45,7 @@ The model was trained using the implementation available in [IntelLabs/Model-Com
 
 ## Fine-Tuning BERT-Large-PruneOFA to SQuADv1.1
 
-To fine-tune BERT-Large-PruneOFA to SQuADv1.1 question answering task we use [NeuralMagic/SparseML](https://github.com/neuralmagic/sparseml), an open-source toolkit that apply sparsification algorithms such as pruning and quantization to neural networks.
+To fine-tune BERT-Large-PruneOFA to SQuADv1.1 question answering task we use [NeuralMagic/SparseML](https://github.com/neuralmagic/sparseml), an open-source toolkit that applies sparsification algorithms such as pruning and quantization to neural networks.
 The model is fine-tuned to SQuADv1.1 and quantized using quantization-aware training and knowledge distillation.
 Additional information on fine-tuning the model is available [here](https://sparsezoo.neuralmagic.com/models/nlp%2Fquestion_answering%2Fbert-large%2Fpytorch%2Fhuggingface%2Fsquad%2Fpruned80_quant-none-vnni).
 
@@ -73,7 +73,7 @@ sparseml.transformers.train.question_answering \
 ## Inference with Deepsparse Runtime Engine
 
 [Deepsparse](https://neuralmagic.com/deepsparse-engine/) runtime-engine, a sparsity-aware neural network inference engine that delivers, we trained the model with block sparsity in the input dimension of the weights.
-The resulted fine-tuned sparse model is compatible with Deepsparse inference engine.
+The resulted fine-tuned sparse model is compatible with Deepsparse runtime engine.
 The model can be exported and deployed using the following commands:
 
 ```bash
