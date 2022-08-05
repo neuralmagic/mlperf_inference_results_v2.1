@@ -16,8 +16,8 @@ Then, we follow our gradual pruning setup to progressively prune the remaining 1
 Assuming that the SparseML library is installed, the bash script to reproduce our pruning setup is as follows:
 ```shell
 CUDA_VISIBLE_DEVICES=0 python src/sparseml/transformers/question_answering.py \
-    --distill_teacher neuralmagic/mobilebert-uncased-finetuned-squadv1 \
-    --model_name_or_path neuralmagic/mobilebert-uncased-finetuned-squadv1 \
+    --distill_teacher zoo:nlp/question_answering/mobilebert-none/pytorch/huggingface/squad/base-none \
+    --model_name_or_path zoo:nlp/question_answering/mobilebert-none/pytorch/huggingface/squad/base-none \
     --dataset_name squad \
     --do_train \
     --fp16 \
@@ -140,7 +140,7 @@ Now that we have a 50% semi-structured pruned 14 layers of the MobileBERT model,
 Assuming that the SparseML library is installed, the bash script to reproduce our quantization setup is as follows:
 ```shell
 CUDA_VISIBLE_DEVICES=0 python src/sparseml/transformers/question_answering.py \
-    --distill_teacher neuralmagic/mobilebert-uncased-finetuned-squadv1 \
+    --distill_teacher zoo:nlp/question_answering/mobilebert-none/pytorch/huggingface/squad/base-none \
     --model_name_or_path /path/to/the/pruned/checkpoint/from/the/previous/step \
     --dataset_name squad \
     --do_train \
