@@ -74,6 +74,7 @@ download_data:
 
 .PHONY: prepare_sparse_models
 prepare_sparse_models:
+	wget -O models/BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz https://zenodo.org/record/6967409/files/BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz
 	cd models && tar xf BERT-Large_pruneofa_80sparse_qat.onnx.tar.xz
 	cd models && tar xf oBERT-Large_95sparse_block4_qat.onnx.tar.xz
 	cd models && tar xf oBERT-MobileBERT_14layer_50sparse_block4_qat.onnx.tar.xz
